@@ -81,17 +81,44 @@
 --for that manager’s employees. The HR department wants the ability to sort the report on a
 --selected column. You can test the data with the following values:
 
-    SELECT id_angajat, nume, salariul, id_departament
-FROM angajati
-WHERE id_manager = &id_manager
-ORDER BY 
-    CASE 
-        WHEN '&coloana_selectata' = 'id_angajat' THEN id_angajat
-        WHEN '&coloana_selectata' = 'nume' THEN nume
-        WHEN '&coloana_selectata' = 'salariul' THEN salariul
-        WHEN '&coloana_selectata' = 'id_departament' THEN id_departament
-    END;
-             
+accept coloana_selectata prompt 'introduceți coloana după care doriți să sortați (id_angajat, nume, salariul, id_departament): ';
+accept id_manager prompt 'introduceți id-ul managerului: ';
+
+select id_angajat, nume, salariul, id_departament
+from angajati
+where id_manager = &id_manager
+order by
+    case when '&coloana_selectata' = 'id_angajat' then id_angajat end,
+    case when '&coloana_selectata' = 'nume' then nume end,
+    case when '&coloana_selectata' = 'salariul' then salariul end,
+    case when '&coloana_selectata' = 'id_departament' then id_departament end;
+
+--Exercitiul 12
+--2. Display all employee last names in which the third letter of the name is a
+ select nume from angajati
+ where nume like '__a%';
+ 
+ --Exercitiul 13
+ --. Display the last names of all employees who have both an a and an e in their last name
+ select nume from angajati
+    where nume like '%e%a%';
+ 
+ --Exercitiul 14
+ -- Display the last name, job, and salary for all employees whose jobs are either sales
+--representative or stock clerk and whose salaries are not equal to $2,500, $3,500, or $7,000.
+ select nume, id_functie, salariul 
+from angajati
+where (id_functie = 'SA_REP' or id_functie = 'ST_CLERK') 
+      and salariul not in (2500, 3500, 7000);
+      
+--Exercitiul 15  
+--Modify lab_02_06.sql to display the last name, salary, and commission for all
+--employees whose commission amount is 20%. Resave lab_02_06.sql as
+--lab_02_15.sql. Rerun the statement in lab_02_15.sql. 
+ select nume, salariul,comision
+    from angajati
+    where comision=0.2;then id_departament end;
+
             
          
 
