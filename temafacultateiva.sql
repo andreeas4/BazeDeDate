@@ -87,3 +87,17 @@ CREATE TABLE feedback (
     data_feedback DATE NOT NULL -- Data în care a fost completat feedback-ul
 );
 
+CREATE TABLE info_rezervari (
+    id_info_rezervare NUMBER(5) CONSTRAINT pk_info_rezervare PRIMARY KEY,  -- Cheie primară
+    nr_rezervare NUMBER(5) CONSTRAINT fk_rezervare_info REFERENCES rezervare(nr_rezervare),  -- Cheie străină către tabela rezervare
+    id_serviciu NUMBER(5) CONSTRAINT fk_serviciu_info REFERENCES serviciu(id_serviciu),  -- Cheie străină către tabela serviciu
+    data_rezervare DATE NOT NULL,  -- Data rezervării
+    cantitate NUMBER(3) DEFAULT 1,  -- Cantitatea serviciului (opțional)
+    pret_total NUMBER(8, 2),  -- Prețul total pentru serviciu (opțional)
+    CONSTRAINT chk_cantitate CHECK (cantitate > 0),  -- Verificare cantitate pozitivă
+    CONSTRAINT chk_pret_total CHECK (pret_total >= 0)  -- Verificare preț pozitiv
+);
+
+
+
+
