@@ -142,3 +142,39 @@ values ('game02', 'utilizator2', 'Tactics Genius');
 insert into achievement (id_joc, username, achievement_name)
 values ('game03', 'utilizator3', 'Puzzle Expert');
 
+-- 1. Obțineți lista utilizatorilor și titlurile jocurilor din biblioteca lor, împreună cu numărul total de zile de când jocul a fost adăugat.
+select u.username, u.nume_user, u.prenume_user, j.titlu, 
+       trunc(sysdate - b.data_adaugare) as zile_in_biblioteca
+from utilizator u
+join biblioteca_user b on u.username = b.username
+join joc j on b.id_joc = j.id_joc;
+
+-- 2. Lista editorilor și numărul total de jocuri publicate de fiecare editor.
+select e.editor_id, e.email_editor, count(j.id_joc) as numar_jocuri
+from editor e
+left join joc j on e.editor_id = j.editor_id
+group by e.editor_id, e.email_editor;
+
+-- 3. Obțineți utilizatorii care au achiziționat cel puțin un joc și suma totală cheltuită pe jocuri.
+select u.username, u.nume_user, u.prenume_user, sum(j.pret) as suma_cheltuita
+from utilizator u
+join achizitii a on u.username = a.username
+join joc j on a.id_joc = j.id_joc
+group by u.username, u.nume_user, u.prenume_user
+having sum(j.pret) > 0;
+
+-- 4. Lista utilizatorilor care au achiziționat cel puțin două jocuri și suma totală cheltuită.
+select u.username, u.nume_user, u.prenume_user, count(a.id_joc) as numar_jocuri, sum(j.pret) as suma_cheltuita
+from utilizator u
+join achizitii a on u.username = a.username
+join joc j on a.id_joc = j.id_joc
+group by u.username, u.nume_user, u.prenume_user
+having count(a.id_joc) >= 2;
+
+-- 5. Obțineți utilizatorii care au în bibliotecă jocuri cu memorie utilizată mai mare de 1GB (1024 MB).
+select u.username, u.nume_user, u.prenume_user, j.titlu, j.memorie_utilizata
+from utilizator u
+join biblioteca_user b on u.username = b.username
+join joc j on b.id_joc = j.id_joc
+where j.memorie_utilizata > 1024
+order by j.memorie_utilizata desc;
