@@ -178,3 +178,40 @@ join biblioteca_user b on u.username = b.username
 join joc j on b.id_joc = j.id_joc
 where j.memorie_utilizata > 1024
 order by j.memorie_utilizata desc;
+
+-- 1. Totalul de bani cheltuiți pe fiecare categorie de jocuri
+SELECT j.categorie, SUM(j.pret) AS total_cheltuit
+FROM joc j
+JOIN achizitii a ON j.id_joc = a.id_joc
+GROUP BY j.categorie
+ORDER BY total_cheltuit DESC;
+
+
+ --2. Numărul de jocuri din fiecare categorie din bibliotecile utilizatorilor
+
+SELECT j.categorie, COUNT(b.id_joc) AS numar_jocuri
+FROM biblioteca_user b
+JOIN joc j ON b.id_joc = j.id_joc
+GROUP BY j.categorie
+ORDER BY numar_jocuri DESC;
+
+-- 3. Suma creditelor disponibile pentru fiecare utilizator pe lună
+SELECT TO_CHAR(b.data_adaugare, 'YYYY-MM') AS luna, u.username, SUM(u.credit) AS total_credit
+FROM utilizator u
+JOIN biblioteca_user b ON u.username = b.username
+GROUP BY TO_CHAR(b.data_adaugare, 'YYYY-MM'), u.username
+ORDER BY luna, u.username;
+
+-- 4. Numărul total de achiziții făcute de fiecare utilizator, împărțit pe luni
+SELECT u.username, TO_CHAR(a.data_comanda, 'YYYY-MM') AS luna, COUNT(a.id_comanda) AS total_achizitii
+FROM utilizator u
+JOIN achizitii a ON u.username = a.username
+GROUP BY u.username, TO_CHAR(a.data_comanda, 'YYYY-MM')
+ORDER BY u.username, luna;
+
+-- 5. Jocurile care au generat cele mai multe achiziții
+SELECT j.titlu, COUNT(a.id_comanda) AS numar_achizitii
+FROM joc j
+JOIN achizitii a ON j.id_joc = a.id_joc
+GROUP BY j.titlu
+ORDER BY numar_achizitii DESC;
