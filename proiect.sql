@@ -215,3 +215,85 @@ FROM joc j
 JOIN achizitii a ON j.id_joc = a.id_joc
 GROUP BY j.titlu
 ORDER BY numar_achizitii DESC;
+--1.Lista utilizatorilor care au cumpărat jocuri cu preț mai mare decât prețul mediu al tuturor jocurilor
+select username, nume_user, prenume_user
+from utilizator
+where username in (
+    select a.username
+    from achizitii a
+    join joc j on a.id_joc = j.id_joc
+    where j.pret > (select avg(pret) from joc)
+);
+--2.utilizatorii care au achiziționat jocuri care costă mai mult de 50
+select u.username, u.nume_user, u.prenume_user
+from utilizator u
+where u.username in (
+    select a.username
+    from achizitii a
+    join joc j on a.id_joc = j.id_joc
+    where j.pret > 50
+);
+--3.editorii care au publicat jocuri cu mai mult de 2GB de memorie utilizată:
+select e.editor_id, e.email_editor
+from editor e
+where e.editor_id in (
+    select j.editor_id
+    from joc j
+    where j.memorie_utilizata > 2048
+);
+--4.utilizatorii care au cheltuit mai mult de 10 pe jocuri:
+select u.username, u.nume_user, u.prenume_user, sum(j.pret) as suma_cheltuita
+from utilizator u
+join achizitii a on u.username = a.username
+join joc j on a.id_joc = j.id_joc
+group by u.username, u.nume_user, u.prenume_user
+having sum(j.pret) > 10;
+--5.jocurile care au fost achiziționate de utilizatori cu mai mult de 100 de credit disponibil:
+select j.titlu, count(a.id_comanda) as numar_achizitii
+from joc j
+join achizitii a on j.id_joc = a.id_joc
+join utilizator u on a.username = u.username
+where u.credit > 100
+group by j.titlu;
+--cereri ierarhice
+----------------------------
+-- 1. Afișarea subordonaților direcți ai unui editor, având id_editor=editor001
+select e.editor_id, e.email_editor, j.titlu
+from editor e
+join joc j on e.editor_id = j.editor_id
+where e.editor_id = 'editor001';
+
+
+
+-- 2. Afișarea superiorilor unui joc 
+select level, e.editor_id, e.email_editor
+from editor e
+start with e.editor_id = 'editor003'
+connect by nocycle prior e.editor_id = e.editor_id  
+order by level;
+
+-- 3. Afișarea subordonaților direcți și indirecți ai unui editor
+select level, e.editor_id, e.email_editor, j.titlu
+from editor e
+join joc j on e.editor_id = j.editor_id
+start with e.editor_id = 'editor001'
+connect by nocycle prior e.editor_id = e.editor_id  -- Prevenirea buclelor
+order by level;
+
+-- 4. Afișarea superiorilor direcți ai unui editor
+select level, e.editor_id, e.email_editor
+from editor e
+start with e.editor_id = 'editor003'
+connect by nocycle prior e.editor_id = e.editor_id  -- Prevenirea buclelor
+order by level;
+
+-- 5. Afișarea numărului total de subordonați direcți și indirecți ai unui editor
+select count(*) as numar_subordonati
+from (
+    select level, e.editor_id, e.email_editor
+    from editor e
+    start with e.editor_id = 'editor001'
+    connect by nocycle prior e.editor_id = e.editor_id 
+);
+
+
