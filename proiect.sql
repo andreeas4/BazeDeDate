@@ -296,4 +296,90 @@ from (
     connect by nocycle prior e.editor_id = e.editor_id 
 );
 
+-- Crearea unei tabele virtuale (view) pentru utilizatorii care au cheltuit mai mult de 50 pe jocuri
+create or replace view utilizatori_care_au_cheltuit_mai_mult_de_50
+as
+select u.username, u.nume_user, u.prenume_user, sum(j.pret) as suma_cheltuita
+from utilizator u
+join achizitii a on u.username = a.username
+join joc j on a.id_joc = j.id_joc
+group by u.username, u.nume_user, u.prenume_user
+having sum(j.pret) > 50;
+
+select * from utilizatori_care_au_cheltuit_mai_mult_de_50;
+
+
+-- Crearea unui index compus pe coloanele 'pret' și 'memorie_utilizata'
+
+create index idx_pret_memorie on joc(pret, memorie_utilizata);
+
+-- Crearea unui index pe coloana 'editor_id'
+
+create index idx_editor_id on joc(editor_id);
+
+-- Crearea unui index pe coloana 'titlu'
+
+create index idx_titlu on joc(titlu);
+
+-- Crearea unui index pe coloana 'id_joc' (deși de obicei este deja indexat implicit)
+
+create index idx_id_joc on joc(id_joc);
+
+-- Crearea unui index pe coloana 'pret' pentru a ajuta la ordonarea rapidă a jocurilor pe baza prețului
+create index idx_pret_order on joc(pret);
+
+
+
+
+
+-- Crearea unui sinonim pentru tabelul 'joc'
+-- Astfel, putem folosi 'games' în loc de 'joc' în interogările noastre
+create synonym games for joc;
+
+-- Crearea unui sinonim pentru coloana 'id_joc'
+-- Acum putem folosi 'game_id' în loc de 'id_joc' în interogările noastre
+create synonym game_id for id_joc;
+
+-- Crearea unui sinonim pentru coloana 'memorie_utilizata'
+-- Folosim 'used_memory' în loc de 'memorie_utilizata'
+create synonym used_memory for memorie_utilizata;
+
+
+create synonym category for categorie;
+
+-- Crearea unui sinonim pentru coloana 'titlu'
+-- Vom folosi 'title' în loc de 'titlu'
+create synonym title for titlu;
+
+-- Crearea unui sinonim pentru coloana 'pret'
+-- Folosim 'price' în loc de 'pret'
+create synonym price for pret;
+
+-- Crearea unui sinonim pentru coloana 'editor_id'
+-- Folosim 'editor_id_ref' în loc de 'editor_id'
+create synonym editor_id_ref for editor_id;
+
+
+-- Crearea unei secvențe pentru generarea automată a valorilor pentru 'game_id'
+-- Folosim sinonimul 'game_id' pentru a se referi la coloana 'id_joc'
+create sequence game_id_seq
+start with 1
+increment by 1;
+
+-- Crearea unei secvențe pentru generarea automată a valorilor pentru 'editor_id_ref'
+-- Folosim sinonimul 'editor_id_ref' pentru a se referi la coloana 'editor_id'
+create sequence editor_id_seq
+start with 1
+increment by 1;
+
+
+
+
+
+
+
+
+
+
+
 
