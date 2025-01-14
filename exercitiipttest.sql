@@ -134,6 +134,120 @@ where id_angajat=(select id_manager from angajati
 --3. Sa se afișeze nume, denumire, salariu... pentru cei care nu și-au schimbat funcția și nu mai știu ce (erau 4 tabele în join)
 
 
+--1. Sa se insereze în angajați o nouă coloana cu minim o restricție
+alter table angajati
+add domiciliu varchar2(200);
+    
+alter table angajati
+add constraint domiciliu_format check(domiciliu like 'jud.%loc.%str.%nr.%');
+
+
+
+--2. Sa se modifice limita de credit pt clienții care au avut comenzi după 2017 cu media celor care au avut peste 3 comenzi
+
+--clientii care au avut comenzi dupa 2017
+--media clientilor care au peste 3 comenzi
+select avg(limita_credit)
+from clienti c
+join comenzi cz
+on c.id_client=cz.id_client
+having count(cz.id_comanda)>3;
+
+update clienti
+set limita_credit=(select avg(limita_credit)
+                    from clienti c
+                    join comenzi cz
+                    on c.id_client=cz.id_client
+                    having count(cz.id_comanda)>3)
+where id_client in(select id_client from comenzi
+                    where extract(year from data)>2017 )
+
+
+SELECT i.id_client,i.limita_credit
+FROM clienti i
+JOIN comenzi ci
+  ON i.id_client = ci.id_client
+WHERE EXTRACT(YEAR FROM ci.data) > 2017;
+
+ --1. Sa se insereze în angajați o nouă coloana cu minim o restricție
+alter table angajati
+add domiciliu varchar2(200);
+    
+alter table angajati
+add constraint domiciliu_format check(domiciliu like 'jud.%loc.%str.%nr.%');
+
+
+
+--2. Sa se modifice limita de credit pt clienții care au avut comenzi după 2017 cu media celor care au avut peste 3 comenzi
+
+--clientii care au avut comenzi dupa 2017
+--media clientilor care au peste 3 comenzi
+select avg(limita_credit)
+from clienti c
+join comenzi cz
+on c.id_client=cz.id_client
+having count(cz.id_comanda)>3;
+
+update clienti
+set limita_credit=(select avg(limita_credit)
+                    from clienti c
+                    join comenzi cz
+                    on c.id_client=cz.id_client
+                    having count(cz.id_comanda)>3)
+where id_client in(select id_client from comenzi
+                    where extract(year from data)>2017 )
+
+
+SELECT i.id_client,i.limita_credit
+FROM clienti i
+JOIN comenzi ci
+  ON i.id_client = ci.id_client
+WHERE EXTRACT(YEAR FROM ci.data) > 2017;
+
+ 
+
+ rollback
+ 
+ --sa se adauge in tabela angajati o coloana noua numita durata_contract
+ --avand doua restrictii si o valoare implicita
+ 
+ alter table angajati
+ add durata_contract number(10) default 2;
+ 
+ alter table angajati
+modify durata_contract not null;
+
+alter table angajati
+add constraint durata_determinata check(durata_contract between 1 and 20);
+
+ alter table angajati
+modify durata_contract default 2;
+ 
+ --sa se modifice pretul de lista al produselor din categoria hardware 7
+ --care se regasesc in comenzi intermediate in ultimul an in care s au dat comenzi
+ --noul pret de lista va fi egal cu cel mai mare pret de lista al
+ --produselor din aceasta categorie
+ 
+ update produse
+ set pret_lista=
+ (select max(pret_lista) from produse)
+where id_produs in
+(
+select id_produs from comenzi
+where extract(year from data)=(select extract(year from data)from comenzi
+                                    order desc by data
+                                    fetch first 1 row only)
+);
+           
+rollback
+
+
+
+
+
+
+
+
 
 
 
