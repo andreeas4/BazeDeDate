@@ -379,8 +379,265 @@ alter table joc add constraint fk_editor foreign key(editor_id) references edito
 
 alter table achievement drop constraint pk_ach;
 alter table achievement add constraint pk_ach primary key (id_joc, username, achievement_name);
+--insert utilizatori
+insert into utilizator (username, nume_user, prenume_user, data_nasterii, email_user, telefon_user, credit)
+values ('andrei.popescu87', 'Popescu', 'Andrei', to_date('1987-06-15', 'YYYY-MM-DD'), 'andrei.popescu@example.com', '0712345678', 150);
 
+insert into utilizator (username, nume_user, prenume_user, data_nasterii, email_user, telefon_user, credit)
+values ('maria.ionescu95', 'Ionescu', 'Maria', to_date('1995-03-22', 'YYYY-MM-DD'), 'maria.ionescu@example.com', '0723456789', 200);
 
+insert into utilizator (username, nume_user, prenume_user, data_nasterii, email_user, telefon_user, credit)
+values ('elena.dumitru92', 'Dumitru', 'Elena', to_date('1992-11-10', 'YYYY-MM-DD'), 'elena.dumitru@example.com', '0734567890', 300);
+
+insert into utilizator (username, nume_user, prenume_user, data_nasterii, email_user, telefon_user, credit)
+values ('mihai.geo85', 'Georgescu', 'Mihai', to_date('1985-07-19', 'YYYY-MM-DD'), 'mihai.georgescu@example.com', '0745678901', 120);
+
+insert into utilizator (username, nume_user, prenume_user, data_nasterii, email_user, telefon_user, credit)
+values ('ioana_stan2000', 'Stan', 'Ioana', to_date('2000-01-30', 'YYYY-MM-DD'), 'ioana.stan@example.com', '0756789012', 500);
+
+insert into utilizator (username, nume_user, prenume_user, data_nasterii, email_user, telefon_user, credit)
+values ('cristian.radulescu98', 'Radulescu', 'Cristian', to_date('1998-05-12', 'YYYY-MM-DD'), 'cristian.radulescu@example.com', '0767890123', 250);
+
+insert into utilizator (username, nume_user, prenume_user, data_nasterii, email_user, telefon_user, credit)
+values ('diana_marine90', 'Marinescu', 'Diana', to_date('1990-09-05', 'YYYY-MM-DD'), 'diana.marinescu@example.com', '0778901234', 180);
+
+insert into utilizator (username, nume_user, prenume_user, data_nasterii, email_user, telefon_user, credit)
+values ('alex.voinea83', 'Voinea', 'Alexandru', to_date('1983-04-25', 'YYYY-MM-DD'), 'alex.voinea@example.com', '0789012345', 320);
+
+insert into utilizator (username, nume_user, prenume_user, data_nasterii, email_user, telefon_user, credit)
+values ('rox.lazar96', 'Lazar', 'Roxana', to_date('1996-12-08', 'YYYY-MM-DD'), 'roxana.lazar@example.com', '0790123456', 400);
+
+insert into utilizator (username, nume_user, prenume_user, data_nasterii, email_user, telefon_user, credit)
+values ('vlad_enache88', 'Enache', 'Vlad', to_date('1988-02-14', 'YYYY-MM-DD'), 'vlad.enache@example.com', '0701234567', 275);
+
+--inserare editori
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1001', 'editor1@example.com', '0712345678');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1002', 'editor2@example.com', '0723456789');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1003', 'editor3@example.com', '0734567890');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1004', 'editor4@example.com', '0745678901');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1005', 'editor5@example.com', '0756789012');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1006', 'editor6@example.com', '0767890123');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1007', 'editor7@example.com', '0778901234');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1008', 'editor8@example.com', '0789012345');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1009', 'editor9@example.com', '0790123456');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1010', 'editor10@example.com', '0701234567');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1011', 'editor11@example.com', '0712233445');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1012', 'editor12@example.com', '0723344556');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1013', 'editor13@example.com', '0734455667');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1014', 'editor14@example.com', '0745566778');
+
+insert into editor (editor_id, email_editor, telefon_editor)
+values ('EDT-1015', 'editor15@example.com', '0756677889');
+
+--inserare jocuri
+
+--inserare jocuri
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1001', 2048, 'Action', 'Super Adventure', 45, 'EDT-1001');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1002', 1024, 'Strategy', 'War Tactics', 55, 'EDT-1002');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1003', 512, 'Puzzle', 'Mind Challenge', 35, 'EDT-1003');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1004', 3072, 'RPG', 'Fantasy Quest', 60, 'EDT-1004');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1005', 4096, 'Shooter', 'Battlefield X', 70, 'EDT-1005');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1006', 1024, 'Racing', 'Speed Rush', 50, 'EDT-1006');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1007', 512, 'Simulation', 'City Builder', 40, 'EDT-1007');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1008', 2048, 'Sports', 'Football Pro', 55, 'EDT-1008');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1009', 3072, 'Horror', 'Dark Nightmares', 65, 'EDT-1009');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1010', 1024, 'Adventure', 'Lost Island', 48, 'EDT-1010');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1011', 1536, 'Strategy', 'Empire Builder', 58, 'EDT-1011');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1012', 4096, 'Action', 'Cyber Assault', 75, 'EDT-1012');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1013', 1024, 'Puzzle', 'Brain Teaser', 30, 'EDT-1013');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1014', 512, 'RPG', 'Hero’s Journey', 45, 'EDT-1014');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1015', 2048, 'Shooter', 'Alien Invasion', 67, 'EDT-1015');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1016', 3072, 'Horror', 'Haunted Mansion', 55, 'EDT-1001');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1017', 1024, 'Adventure', 'Space Odyssey', 50, 'EDT-1002');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1018', 4096, 'Racing', 'Off-Road Kings', 60, 'EDT-1003');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1019', 1536, 'Simulation', 'Farming Life', 45, 'EDT-1004');
+
+insert into joc (id_joc, memorie_utilizata, categorie, titlu, pret, editor_id)
+values ('JOC-1020', 1024, 'Sports', 'Tennis Champion', 35, 'EDT-1005');
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1004', 'andrei.popescu87', TO_DATE('2024-02-01', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1005', 'maria.ionescu95', TO_DATE('2024-02-10', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1006', 'elena.dumitru92', TO_DATE('2024-02-20', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1007', 'mihai.geo85', TO_DATE('2024-03-05', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1008', 'ioana_stan2000', TO_DATE('2024-03-10', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1009', 'cristian.radulescu98', TO_DATE('2024-03-15', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1010', 'diana_marine90', TO_DATE('2024-03-20', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1011', 'alex.voinea83', TO_DATE('2024-03-25', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1012', 'rox.lazar96', TO_DATE('2024-04-01', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1013', 'vlad_enache88', TO_DATE('2024-04-05', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1015', 'mihai.geo85', TO_DATE('2024-04-12', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1016', 'ioana_stan2000', TO_DATE('2024-04-15', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1017', 'cristian.radulescu98', TO_DATE('2024-04-20', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1018', 'diana_marine90', TO_DATE('2024-04-22', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1019', 'alex.voinea83', TO_DATE('2024-04-25', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1020', 'rox.lazar96', TO_DATE('2024-04-28', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1004', 'vlad_enache88', TO_DATE('2024-05-01', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1005', 'andrei.popescu87', TO_DATE('2024-05-03', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1006', 'maria.ionescu95', TO_DATE('2024-05-05', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1007', 'elena.dumitru92', TO_DATE('2024-05-08', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1004', 'mihai.geo85', TO_DATE('2024-02-01', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1005', 'ioana_stan2000', TO_DATE('2024-02-02', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1006', 'cristian.radulescu98', TO_DATE('2024-02-03', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1007', 'diana_marine90', TO_DATE('2024-02-04', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1008', 'alex.voinea83', TO_DATE('2024-02-05', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1009', 'rox.lazar96', TO_DATE('2024-02-06', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1010', 'vlad_enache88', TO_DATE('2024-02-07', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1011', 'andrei.popescu87', TO_DATE('2024-02-08', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1012', 'maria.ionescu95', TO_DATE('2024-02-09', 'YYYY-MM-DD'));
+
+INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+VALUES ('JOC-1013', 'elena.dumitru92', TO_DATE('2024-02-10', 'YYYY-MM-DD'));
+
+INSERT INTO achievement (id_joc, username, achievement_name)
+VALUES ('JOC-1004', 'mihai.geo85', 'Legendary Warrior');
+
+INSERT INTO achievement (id_joc, username, achievement_name)
+VALUES ('JOC-1005', 'ioana_stan2000', 'Sharpshooter Elite');
+
+INSERT INTO achievement (id_joc, username, achievement_name)
+VALUES ('JOC-1006', 'cristian.radulescu98', 'Speed Demon');
+
+INSERT INTO achievement (id_joc, username, achievement_name)
+VALUES ('JOC-1007', 'diana_marine90', 'Architect of the Future');
+
+INSERT INTO achievement (id_joc, username, achievement_name)
+VALUES ('JOC-1008', 'alex.voinea83', 'Football Legend');
+
+INSERT INTO achievement (id_joc, username, achievement_name)
+VALUES ('JOC-1009', 'rox.lazar96', 'Master of Fear');
+
+INSERT INTO achievement (id_joc, username, achievement_name)
+VALUES ('JOC-1010', 'vlad_enache88', 'Survival Expert');
+
+INSERT INTO achievement (id_joc, username, achievement_name)
+VALUES ('JOC-1011', 'andrei.popescu87', 'Empire Architect');
+
+INSERT INTO achievement (id_joc, username, achievement_name)
+VALUES ('JOC-1012', 'maria.ionescu95', 'Cyber Warrior');
+
+INSERT INTO achievement (id_joc, username, achievement_name)
+VALUES ('JOC-1013', 'elena.dumitru92', 'Brainiac');
 
 
 
