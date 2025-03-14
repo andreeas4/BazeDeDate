@@ -372,6 +372,13 @@ create sequence editor_id_seq
 start with 1
 increment by 1;
 
+alter table utilizator modify data_nasterii DATE NOT NULL;
+
+alter table joc drop constraint editor_id;
+alter table joc add constraint fk_editor foreign key(editor_id) references editor(editor_id);
+
+alter table achievement drop constraint pk_ach;
+alter table achievement add constraint pk_ach primary key (id_joc, username, achievement_name);
 
 
 
