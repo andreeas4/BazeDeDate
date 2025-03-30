@@ -639,6 +639,120 @@ VALUES ('JOC-1012', 'maria.ionescu95', 'Cyber Warrior');
 INSERT INTO achievement (id_joc, username, achievement_name)
 VALUES ('JOC-1013', 'elena.dumitru92', 'Brainiac');
 
+SET SERVEROUTPUT ON
+-- 1. Cursor implicit pentru a insuma preturile jocurilor dintr-o categorie specifica
+DECLARE
+    v_suma NUMBER := 0;
+BEGIN
+   
+    SELECT SUM(pret) INTO v_suma FROM joc WHERE categorie = 'Sports';
+    
+    DBMS_OUTPUT.PUT_LINE('Suma preturilor pentru categoria Sports: ' || v_suma);
+END;
+/
+select *from joc;
+SET SERVEROUTPUT ON
+-- 2. Cursor explicit pentru a lista titlurile jocurilor cu memorie utilizata mai mare de 500MB
+DECLARE
+    CURSOR c_jocuri IS
+        SELECT titlu FROM joc WHERE memorie_utilizata > 500;
+    v_titlu joc.titlu%TYPE;
+BEGIN
+    OPEN c_jocuri;
+    LOOP
+        FETCH c_jocuri INTO v_titlu;
+        EXIT WHEN c_jocuri%NOTFOUND;
+        DBMS_OUTPUT.PUT_LINE('Joc: ' || v_titlu);
+    END LOOP;
+    CLOSE c_jocuri;
+END;
+/
+select editor_id from joc;
+
+SET SERVEROUTPUT ON
+-- 3. Cursor FOR LOOP pentru a afisa toate jocurile dintr-o categorie data
+BEGIN
+    FOR r_joc IN (SELECT titlu FROM joc WHERE categorie ='RPG') LOOP
+        DBMS_OUTPUT.PUT_LINE('Joc de actiune: ' || r_joc.titlu);
+    END LOOP;
+END;
+
+/
+SET SERVEROUTPUT ON
+-- 4. Cursor explicit pentru a actualiza pretul jocurilor sub 50 cu o crestere de 10%
+DECLARE
+    CURSOR c_preturi IS
+        SELECT id_joc, pret FROM joc WHERE pret < 50 FOR UPDATE;
+    v_id joc.id_joc%TYPE;
+    v_pret joc.pret%TYPE;
+BEGIN
+    OPEN c_preturi;
+    LOOP
+        FETCH c_preturi INTO v_id, v_pret;
+        EXIT WHEN c_preturi%NOTFOUND;
+        UPDATE joc SET pret = v_pret * 1.1 WHERE id_joc = v_id;
+    END LOOP;
+    CLOSE c_preturi;
+    COMMIT;
+END;
+/
+SET SERVEROUTPUT ON
+--5.Cursor explicit cu parametri afișează toate jocurile care costă mai mult decât un preț dat ca parametru.
+DECLARE
+    CURSOR cur_jocuri(v_pret NUMBER) IS 
+        SELECT titlu, pret FROM joc WHERE pret > v_pret;
+
+    v_titlu joc.titlu%TYPE;
+    v_pret joc.pret%TYPE;
+    
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Jocurile cu pret mai mare decat pragul dat:');
+    
+    OPEN cur_jocuri(50); -- De exemplu, 50 RON ca limită
+    LOOP
+        FETCH cur_jocuri INTO v_titlu, v_pret;
+        EXIT WHEN cur_jocuri%NOTFOUND;
+        
+        DBMS_OUTPUT.PUT_LINE('Titlu: ' || v_titlu || ' | Pret: ' || v_pret || ' RON');
+    END LOOP;
+    
+    CLOSE cur_jocuri;
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Eroare: ' || SQLERRM);
+END;
+/
+SET SERVEROUTPUT ON
+--6. Cursor implicit care calculează și afișează suma totală a memoriei utilizate de jocurile din fiecare categorie.
+DECLARE
+    v_total_memorie NUMBER;
+    v_categorie joc.categorie%TYPE;
+
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Total memorie utilizata per categorie:');
+    
+    FOR rec IN (SELECT categorie, SUM(memorie_utilizata) AS total_mem FROM joc GROUP BY categorie) LOOP
+        v_categorie := rec.categorie;
+        v_total_memorie := rec.total_mem;
+        
+        DBMS_OUTPUT.PUT_LINE('Categorie: ' || v_categorie || ' | Memorie Totala: ' || v_total_memorie || ' MB');
+    END LOOP;
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('Nu exista date in tabel.');
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Eroare: ' || SQLERRM);
+END;
+/
+
+
+
+
+
+
+
 
 
 
