@@ -819,6 +819,46 @@ VALUES ('JOC-1015', 'utilizator3', 'comanda12', TO_DATE('2024-05-15', 'YYYY-MM-D
 INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
 VALUES ('JOC-1019', 'vlad_enache88', 'comanda13', TO_DATE('2024-05-20', 'YYYY-MM-DD'));
 
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1020', 'alex.voinea83', 'comanda14', TO_DATE('2024-05-25', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('game01', 'andrei.popescu87', 'comanda15', TO_DATE('2024-05-27', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('game02', 'cristian.radulescu98', 'comanda16', TO_DATE('2024-05-28', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('game03', 'diana_marine90', 'comanda17', TO_DATE('2024-05-29', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1004', 'elena.dumitru92', 'comanda18', TO_DATE('2024-06-01', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1005', 'ioana_stan2000', 'comanda19', TO_DATE('2024-06-03', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1006', 'maria.ionescu95', 'comanda20', TO_DATE('2024-06-05', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1007', 'mihai.geo85', 'comanda21', TO_DATE('2024-06-07', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1008', 'rox.lazar96', 'comanda22', TO_DATE('2024-06-10', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1009', 'utilizator1', 'comanda23', TO_DATE('2024-06-12', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1010', 'utilizator2', 'comanda24', TO_DATE('2024-06-14', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1011', 'utilizator3', 'comanda25', TO_DATE('2024-06-15', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1012', 'vlad_enache88', 'comanda26', TO_DATE('2024-06-16', 'YYYY-MM-DD'));
+
+
 
 
 
