@@ -780,6 +780,44 @@ ADD CONSTRAINT fk_joc FOREIGN KEY (id_joc)
 REFERENCES JOCURI(id_joc) 
 ON DELETE CASCADE;
 
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1004', 'alex.voinea83', 'comanda01', TO_DATE('2024-01-16', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1005', 'andrei.popescu87', 'comanda02', TO_DATE('2024-02-11', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1006', 'cristian.radulescu98', 'comanda03', TO_DATE('2024-03-06', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1007', 'diana_marine90', 'comanda04', TO_DATE('2024-04-01', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1008', 'elena.dumitru92', 'comanda05', TO_DATE('2024-04-10', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1009', 'ioana_stan2000', 'comanda06', TO_DATE('2024-04-15', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1010', 'maria.ionescu95', 'comanda07', TO_DATE('2024-04-20', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1011', 'mihai.geo85', 'comanda08', TO_DATE('2024-04-25', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1012', 'rox.lazar96', 'comanda09', TO_DATE('2024-05-01', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1013', 'utilizator1', 'comanda10', TO_DATE('2024-05-05', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1014', 'utilizator2', 'comanda11', TO_DATE('2024-05-10', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1015', 'utilizator3', 'comanda12', TO_DATE('2024-05-15', 'YYYY-MM-DD'));
+
+INSERT INTO ACHIZITII (id_joc, username, id_comanda, data_comanda)
+VALUES ('JOC-1019', 'vlad_enache88', 'comanda13', TO_DATE('2024-05-20', 'YYYY-MM-DD'));
 
 
 
