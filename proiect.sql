@@ -751,6 +751,34 @@ END;
 ALTER TABLE joc RENAME TO jocuri;
 ALTER TABLE utilizator RENAME TO utilizatori;
 ALTER TABLE editor RENAME TO editori;
+--fac tabelul achizitii tabel independet deoarece am realizat ca nu este legatura facuta bine intre bibioteca_user si achizitii
+ALTER TABLE achizitii
+DROP CONSTRAINT fk_bibl_user;
+--creez in PL/SQL un trigger astfel incat toate valorile pe care le adaug in achizitii acum sa se adauge automat in biblioteca user
+CREATE OR REPLACE TRIGGER adauga_in_biblioteca
+AFTER INSERT ON achizitii
+FOR EACH ROW
+BEGIN
+    INSERT INTO biblioteca_user (id_joc, username, data_adaugare)
+    VALUES (:NEW.id_joc, :NEW.username, SYSDATE);
+END;
+ALTER TABLE achievement RENAME TO achievements;
+
+--sterg datele din biblioteca_user,achizitii,achievements in ordinea ierarhica legaturilor
+DELETE FROM stanciulescua_64.achievements;
+DELETE FROM stanciulescua_64.achizitii;
+DELETE FROM stanciulescua_64.biblioteca_user;
+
+--creez legaturile corect
+ALTER TABLE ACHIZITII
+ADD CONSTRAINT fk_utilizator FOREIGN KEY (id_utilizator) 
+REFERENCES UTILIZATORI(id_utilizator) 
+ON DELETE CASCADE;
+
+ALTER TABLE ACHIZITII
+ADD CONSTRAINT fk_joc FOREIGN KEY (id_joc) 
+REFERENCES JOCURI(id_joc) 
+ON DELETE CASCADE;
 
 
 
