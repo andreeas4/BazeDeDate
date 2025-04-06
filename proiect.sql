@@ -748,7 +748,9 @@ END;
 /
 
 
-
+ALTER TABLE joc RENAME TO jocuri;
+ALTER TABLE utilizator RENAME TO utilizatori;
+ALTER TABLE editor RENAME TO editori;
 
 
 
